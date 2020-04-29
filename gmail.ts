@@ -1,3 +1,8 @@
+interface ThreadMessage {
+  id: string
+  date: string
+}
+
 class GMail {
   private gmailApp: GoogleAppsScript.Gmail.GmailApp
 
@@ -9,12 +14,16 @@ class GMail {
     return this.gmailApp.search(text);
   }
 
-  static getFlattenMessagesFromThreads(threads: GoogleAppsScript.Gmail.GmailThread[]) {
-    const threadsMessages = [];
+  static getFlattenMessagesFromThreads(threads: GoogleAppsScript.Gmail.GmailThread[]): ThreadMessage[] {
+    const threadsMessages: ThreadMessage[] = [];
     threads.forEach((thread) => {
       const messages = thread.getMessages();
-      messages.forEach((message) => {
-        console.log(message.getDate());
+      messages.reverse().forEach((message) => {
+        const threadMessage: ThreadMessage = {
+          id: message.getId(),
+          date: message.getDate().toDateString(),
+        };
+        threadsMessages.push(threadMessage);
       });
     });
     return threadsMessages;
