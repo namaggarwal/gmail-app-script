@@ -10,12 +10,14 @@ class GMail {
   }
 
   static getFlattenMessagesFromThreads(threads: GoogleAppsScript.Gmail.GmailThread[]) {
-    const messages = [];
+    const threadsMessages = [];
     threads.forEach((thread) => {
-      const message = thread.getMessages();
-      console.log(message);
+      const messages = thread.getMessages();
+      messages.forEach((message) => {
+        console.log(message.getDate());
+      });
     });
-    return messages;
+    return threadsMessages;
   }
 }
 
