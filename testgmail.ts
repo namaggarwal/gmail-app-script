@@ -5,5 +5,5 @@ import GMail from './gmail';
 
 function testGmailSearch() {
   const obj = new GMail(GmailApp);
-  console.log(obj.search('naman aggarwal'));
+  console.log(GMail.getFlattenMessagesFromThreads(obj.search('label:bank-sc transaction alert primary newer_than:10d')));
 }
