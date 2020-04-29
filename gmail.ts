@@ -1,4 +1,4 @@
-interface ThreadMessage {
+export type ThreadMessage = {
   id: string
   date: GoogleAppsScript.Base.Date
   text: string
