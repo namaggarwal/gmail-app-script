@@ -1,6 +1,7 @@
 interface ThreadMessage {
   id: string
-  date: string
+  date: GoogleAppsScript.Base.Date
+  text: string
 }
 
 class GMail {
@@ -21,7 +22,8 @@ class GMail {
       messages.reverse().forEach((message) => {
         const threadMessage: ThreadMessage = {
           id: message.getId(),
-          date: message.getDate().toDateString(),
+          date: message.getDate(),
+          text: message.getPlainBody(),
         };
         threadsMessages.push(threadMessage);
       });
