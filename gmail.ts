@@ -15,10 +15,13 @@ class GMail {
     return this.gmailApp.search(text);
   }
 
-  static getFlattenMessagesFromThreads(threads: GoogleAppsScript.Gmail.GmailThread[]): ThreadMessage[] {
+  static getFlattenMessagesFromThreads(
+    threads: GoogleAppsScript.Gmail.GmailThread[],
+  ): ThreadMessage[] {
     const threadsMessages: ThreadMessage[] = [];
     threads.forEach((thread) => {
       const messages = thread.getMessages();
+      // Reverse so we can always follow the reverse cronological order
       messages.reverse().forEach((message) => {
         const threadMessage: ThreadMessage = {
           id: message.getId(),
